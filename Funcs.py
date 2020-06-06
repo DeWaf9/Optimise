@@ -177,6 +177,7 @@ def GetAttrPref(x):
     return x
 
 def PrintAttr(x):
+    """Prints a nice table for attribute scores"""
     print("+-----------------------------------+")
     print("| STR | DEX | CON | INT | WIS | CHA |")
     print("| " + str(x.str) + "  | " + str(x.dex) + "  | " + str(x.con) + "  | " + str(x.int) + "  | " + str(x.wis) + "  | " + str(x.cha) + "  |")
@@ -770,13 +771,256 @@ def GetRace(x, eb):
 
     return x
 
-def PrintTTT(x):
-    pass
+def PrintTTT(x, F, R):
+    """Prints Time To Twenty for each preference"""
+    asis = 0
+    asimax = 5#Set different limits for max ASIs based on class
+    if F:
+        asimax = 7#fighters get 2 more ASIs
+    elif R:
+        asimax = 6#rogues get 1 more ASI
+    carry = False#Detects whether there's a carry over from the previous preference. Eg: an ASI would take an attribute from 19 -> 21. Instead, makes that 20, and makes carry True.
+    #Then in the next preference section we add 1 to that attribute
+    if x.primary  == "str":
+        while x.str < 20 and asis < asimax:
+            if x.str + 2 <= 20:
+                x.str = x.str + 2
+                asis = asis + 1
+            elif x.str + 2 == 21:
+                x.str = x.str + 1
+                asis = asis + 1
+                carry = True
+        tttprimary = asis#record # of asi's it took to get to 20
 
-def PrintTTTF(x):
-    pass
+    elif x.primary  == "dex":
+        while x.dex < 20 and asis < asimax:
+            if x.dex + 2 <= 20:
+                x.dex = x.dex + 2
+                asis = asis + 1
+            elif x.dex + 2 == 21:
+                x.dex = x.dex + 1
+                asis = asis + 1
+                carry = True
+        tttprimary = asis
 
-def PrintTTTR(x):
-    pass
+    elif x.primary  == "con":
+        while x.con < 20 and asis < asimax:
+            if x.con + 2 <= 20:
+                x.con = x.con + 2
+                asis = asis + 1
+            elif x.con + 2 == 21:
+                x.con = x.con + 1
+                asis = asis + 1
+                carry = True
+        tttprimary = asis
+        
+    elif x.primary  == "int":
+        while x.int < 20 and asis < asimax:
+            if x.int + 2 <= 20:
+                x.int = x.int + 2
+                asis = asis + 1
+            elif x.int + 2 == 21:
+                x.int = x.int + 1
+                asis = asis + 1
+                carry = True
+        tttprimary = asis
+
+    elif x.primary  == "wis":
+        while x.wis < 20 and asis < asimax:
+            if x.wis + 2 <= 20:
+                x.wis = x.wis + 2
+                asis = asis + 1
+            elif x.wis + 2 == 21:
+                x.wis = x.wis + 1
+                asis = asis + 1
+                carry = True
+        tttprimary = asis
+
+    elif x.primary  == "cha":
+        while x.cha < 20 and asis < asimax:
+            if x.cha + 2 <= 20:
+                x.cha = x.cha + 2
+                asis = asis + 1
+            elif x.cha + 2 == 21:
+                x.cha = x.cha + 1
+                asis = asis + 1
+                carry = True
+        tttprimary = asis
+
+    if x.secondary  == "str":
+        if carry:
+            x.str = x.str + 1
+            carry = False
+        while x.str < 20 and asis < asimax:
+            if x.str + 2 <= 20:
+                x.str = x.str + 2
+                asis = asis + 1
+            elif x.str + 2 == 21:
+                x.str = x.str + 1
+                asis = asis + 1
+                carry = True
+        tttsecondary = asis
+
+    elif x.secondary  == "dex":
+        if carry:
+            x.dex = x.dex + 1
+            carry = False
+        while x.dex < 20 and asis < asimax:
+            if x.dex + 2 <= 20:
+                x.dex = x.dex + 2
+                asis = asis + 1
+            elif x.dex + 2 == 21:
+                x.dex = x.dex + 1
+                asis = asis + 1
+                carry = True
+        tttsecondary = asis
+
+    elif x.secondary  == "con":
+        if carry:
+            x.con = x.con + 1
+            carry = False
+        while x.con < 20 and asis < asimax:
+            if x.con + 2 <= 20:
+                x.con = x.con + 2
+                asis = asis + 1
+            elif x.con + 2 == 21:
+                x.con = x.con + 1
+                asis = asis + 1
+                carry = True
+        tttsecondary = asis
+
+    elif x.secondary  == "int":
+        if carry:
+            x.int = x.int + 1
+            carry = False
+        while x.int < 20 and asis < asimax:
+            if x.int + 2 <= 20:
+                x.int = x.int + 2
+                asis = asis + 1
+            elif x.int + 2 == 21:
+                x.int = x.int + 1
+                asis = asis + 1
+                carry = True
+        tttsecondary = asis
+
+    elif x.secondary  == "wis":
+        if carry:
+            x.wis = x.wis + 1
+            carry = False
+        while x.wis < 20 and asis < asimax:
+            if x.wis + 2 <= 20:
+                x.wis = x.wis + 2
+                asis = asis + 1
+            elif x.wis + 2 == 21:
+                x.wis = x.wis + 1
+                asis = asis + 1
+                carry = True
+        tttsecondary = asis
+
+    elif x.secondary  == "cha":
+        if carry:
+            x.cha = x.cha + 1
+            carry = False
+        while x.cha < 20 and asis < asimax:
+            if x.cha + 2 <= 20:
+                x.cha = x.cha + 2
+                asis = asis + 1
+            elif x.cha + 2 == 21:
+                x.cha = x.cha + 1
+                asis = asis + 1
+                carry = True
+        tttsecondary = asis
+
+    if x.tertiary  == "str":
+        if carry:
+            x.str = x.str + 1
+            carry = False
+        while x.str < 20 and asis < asimax:
+            if x.str + 2 <= 20:
+                x.str = x.str + 2
+                asis = asis + 1
+            elif x.str + 2 == 21:
+                x.str = x.str + 1
+                asis = asis + 1
+                carry = True
+        ttttertiary = asis
+
+    elif x.tertiary  == "dex":
+        if carry:
+            x.dex = x.dex + 1
+            carry = False
+        while x.dex < 20 and asis < asimax:
+            if x.dex + 2 <= 20:
+                x.dex = x.dex + 2
+                asis = asis + 1
+            elif x.dex + 2 == 21:
+                x.dex = x.dex + 1
+                asis = asis + 1
+                carry = True
+        ttttertiary = asis
+
+    elif x.tertiary  == "con":
+        if carry:
+            x.con = x.con + 1
+            carry = False
+        while x.con < 20 and asis < asimax:
+            if x.con + 2 <= 20:
+                x.con = x.con + 2
+                asis = asis + 1
+            elif x.con + 2 == 21:
+                x.con = x.con + 1
+                asis = asis + 1
+                carry = True
+        ttttertiary = asis
+
+    elif x.tertiary  == "int":
+        if carry:
+            x.int = x.int + 1
+            carry = False
+        while x.int < 20 and asis < asimax:
+            if x.int + 2 <= 20:
+                x.int = x.int + 2
+                asis = asis + 1
+            elif x.int + 2 == 21:
+                x.int = x.int + 1
+                asis = asis + 1
+                carry = True
+        ttttertiary = asis
+
+    elif x.tertiary  == "wis":
+        if carry:
+            x.wis = x.wis + 1
+            carry = False
+        while x.wis < 20 and asis < asimax:
+            if x.wis + 2 <= 20:
+                x.wis = x.wis + 2
+                asis = asis + 1
+            elif x.wis + 2 == 21:
+                x.wis = x.wis + 1
+                asis = asis + 1
+                carry = True
+        ttttertiary = asis
+
+    elif x.tertiary  == "cha":
+        if carry:
+            x.cha = x.cha + 1
+            carry = False
+        while x.cha < 20 and asis < asimax:
+            if x.cha + 2 <= 20:
+                x.cha = x.cha + 2
+                asis = asis + 1
+            elif x.cha + 2 == 21:
+                x.cha = x.cha + 1
+                asis = asis + 1
+                carry = True
+        ttttertiary = asis
+
+    if F == False and R == False:
+        if tttprimary == asimax:
+            print("20 " + x.primary + " will be reached at lv 20")
+        #elif
+            
+
+
 
 #next

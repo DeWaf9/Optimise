@@ -71,10 +71,12 @@ user = Funcs.GetRace(user, eb)#Goes through dozens of if/else statements and can
 print("Updated attribute scores:")
 Funcs.PrintAttr(user)#ascii art of current configuration
 
-print("Preparing to calculate level at 20.")
+print("Preparing to calculate level required for 20 score.")
 awaiting = True
 print("Are you playing as a Fighter or Rogue?")#Figher & Rogue's get extra ASIs, it's imporant to know beforehand
 
+F = False
+R = False
 while awaiting:#grabs user's player class, and puts them in booleans
     ForR = input(":")
     ForR = ForR.lower()
@@ -84,20 +86,24 @@ while awaiting:#grabs user's player class, and puts them in booleans
     elif ForR == "no" or ForR == "n" or ForR == "nah":
         print("Neither class selected!")
         awaiting = False
-        Funcs.PrintTTT(user)#All other classes. Get ASIs only at 4, 8, 12, 16 & 19
+        #Funcs.PrintTTT(user)#All other classes. Get ASIs only at 4, 8, 12, 16 & 19
 
     elif ForR == "fighter" or ForR == "f":
         print("Fighter class selected!")
         awaiting = False
-        Funcs.PrintTTTF(user)#Fighter. Gets additional ASIs at 6 & 14
+        F = True
+        #Funcs.PrintTTTF(user)#Fighter. Gets additional ASIs at 6 & 14
 
     elif ForR == "rogue" or ForR == "r" or ForR == "rouge": 
         print("Rogue class selected!")
         awaiting = False
-        Funcs.PrintTTTR(user)#Rogue. Gets additional ASI at 10
+        R = True
+        #Funcs.PrintTTTR(user)#Rogue. Gets additional ASI at 10
 
     else:
         print("Didn\'t understand input. Please try again:")
+
+Funcs.PrintTTT(user, F, R)
 
 
 #suggest other races given tertiary and secondary preferences
