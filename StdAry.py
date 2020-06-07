@@ -83,3 +83,11 @@ def AssignOtherScores(x):
 
     return x
 
+def PrintLeftovers(x):
+    if x.secondary == "none":
+        print("14, 13, 12, 10, 8\n")
+    elif x.tertiary == "none" and x.secondary != "none":
+        print("13, 12, 10, 8\n")
+    else:
+        print("12, 10, 8\n")
+

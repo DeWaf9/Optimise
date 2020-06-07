@@ -24,8 +24,6 @@ class character:
         self.tertiary = "none"
         self.race = "N/A"
 
-
-
 def GetAttrScores(x):
 
         if x.primary == "str":
@@ -109,3 +107,10 @@ def AssignOtherScores(x):
 
     return x
 
+def PrintLeftovers(x):
+    """Simply prints leftover scores in no particular order"""
+    for i in x.stats:
+        if x.stats[i] != 0:
+            print(i + ",")
+    print("\n")
+    

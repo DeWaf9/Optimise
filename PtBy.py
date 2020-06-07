@@ -163,3 +163,29 @@ def AssignOtherScores(x):
 
     return x
 
+def PrintLeftovers(x):
+    """Simply prints leftover scores in no particular order"""
+    
+    print("You have " + str(x.pool) + " points left for score distribution")
+    if x.pool == 0:#we went silly, all 3 attributes are 15, no more points left
+        print("Your leftover scores are:  8, 8, 8\n")
+    else:
+        print("These can be arranged as uniformly as:")
+        if x.secondary == "none": #only primary choice. We have 15
+            print("12, 12, 12, 11, 11\n")
+        elif x.tertiary == "none" and x.secondary != "none": #only secondary choice. We have 15, 15
+            print("11, 10, 10, 10\n")
+        elif x.tertiary != "none":#sensible build chosen, 15, 15, 13
+            print("10, 9, 9\n")
+        
+        print("Or as unevenly as:")
+        if x.secondary == "none": #only primary choice. We have 15
+            print("15, 15, 8, 8, 8\n")
+        elif x.tertiary == "none" and x.secondary != "none": #only secondary choice. We have 15, 15
+            print("15, 8, 8, 8\n")
+        elif x.tertiary != "none":#sensible build chosen, 15, 15, 13
+            print("12, 8, 8\n")
+    
+    print("Or anything else in-between!\n")
+
+

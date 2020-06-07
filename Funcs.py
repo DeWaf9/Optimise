@@ -178,10 +178,10 @@ def GetAttrPref(x):
 
 def PrintAttr(x):
     """Prints a nice table for attribute scores"""
-    print("+-----------------------------------+")
+    print("\n+-----------------------------------+")
     print("| STR | DEX | CON | INT | WIS | CHA |")
     print("| " + str(x.str) + "  | " + str(x.dex) + "  | " + str(x.con) + "  | " + str(x.int) + "  | " + str(x.wis) + "  | " + str(x.cha) + "  |")
-    print("+-----------------------------------+")
+    print("+-----------------------------------+\n")
 
 def GetRace(x, eb):
     """Determines optimum race based on preferences"""
@@ -295,7 +295,10 @@ def GetRace(x, eb):
                 x.dex = x.dex + 2
                 x.con = x.con + 1
             elif x.tertiary == "int":
-                x.race = "High Elf or Eladrin"
+                if eb:
+                    x.race = "High Elf or Eladrin or Human Mark of Passage"
+                else:
+                    x.race = "High Elf or Eladrin"
                 x.dex = x.dex + 2
                 x.int = x.int + 1
                 print(x.race + " chosen!")
@@ -329,7 +332,10 @@ def GetRace(x, eb):
         
 
         elif x.secondary == "int":
-            x.race = "High Elf or Eladrin"
+            if eb:
+                x.race = "High Elf or Eladrin or Human Mark of Passage"
+            else:
+                x.race = "High Elf or Eladrin"
             x.dex = x.dex + 2
             x.int = x.int + 1
             print(x.race + " chosen!")
@@ -773,7 +779,8 @@ def GetRace(x, eb):
 
 def PrintTTT(x, F, R):
     """Prints Time To Twenty for each preference"""
-    asis = 0
+    ttt = [0, 0, 0]#record # of asi's it took to get to 20 for primary, secondary & tertiary preferences
+    asis = 0#counts # of ASIs
     asimax = 5#Set different limits for max ASIs based on class
     if F:
         asimax = 7#fighters get 2 more ASIs
@@ -790,7 +797,7 @@ def PrintTTT(x, F, R):
                 x.str = x.str + 1
                 asis = asis + 1
                 carry = True
-        tttprimary = asis#record # of asi's it took to get to 20
+        ttt[0] = asis
 
     elif x.primary  == "dex":
         while x.dex < 20 and asis < asimax:
@@ -801,7 +808,7 @@ def PrintTTT(x, F, R):
                 x.dex = x.dex + 1
                 asis = asis + 1
                 carry = True
-        tttprimary = asis
+        ttt[0] = asis
 
     elif x.primary  == "con":
         while x.con < 20 and asis < asimax:
@@ -812,7 +819,7 @@ def PrintTTT(x, F, R):
                 x.con = x.con + 1
                 asis = asis + 1
                 carry = True
-        tttprimary = asis
+        ttt[0] = asis
         
     elif x.primary  == "int":
         while x.int < 20 and asis < asimax:
@@ -823,7 +830,7 @@ def PrintTTT(x, F, R):
                 x.int = x.int + 1
                 asis = asis + 1
                 carry = True
-        tttprimary = asis
+        ttt[0] = asis
 
     elif x.primary  == "wis":
         while x.wis < 20 and asis < asimax:
@@ -834,7 +841,7 @@ def PrintTTT(x, F, R):
                 x.wis = x.wis + 1
                 asis = asis + 1
                 carry = True
-        tttprimary = asis
+        ttt[0] = asis
 
     elif x.primary  == "cha":
         while x.cha < 20 and asis < asimax:
@@ -845,7 +852,7 @@ def PrintTTT(x, F, R):
                 x.cha = x.cha + 1
                 asis = asis + 1
                 carry = True
-        tttprimary = asis
+        ttt[0] = asis
 
     if x.secondary  == "str":
         if carry:
@@ -859,7 +866,7 @@ def PrintTTT(x, F, R):
                 x.str = x.str + 1
                 asis = asis + 1
                 carry = True
-        tttsecondary = asis
+        ttt[1] = asis
 
     elif x.secondary  == "dex":
         if carry:
@@ -873,7 +880,7 @@ def PrintTTT(x, F, R):
                 x.dex = x.dex + 1
                 asis = asis + 1
                 carry = True
-        tttsecondary = asis
+        ttt[1] = asis
 
     elif x.secondary  == "con":
         if carry:
@@ -887,7 +894,7 @@ def PrintTTT(x, F, R):
                 x.con = x.con + 1
                 asis = asis + 1
                 carry = True
-        tttsecondary = asis
+        ttt[1] = asis
 
     elif x.secondary  == "int":
         if carry:
@@ -901,7 +908,7 @@ def PrintTTT(x, F, R):
                 x.int = x.int + 1
                 asis = asis + 1
                 carry = True
-        tttsecondary = asis
+        ttt[1] = asis
 
     elif x.secondary  == "wis":
         if carry:
@@ -915,7 +922,7 @@ def PrintTTT(x, F, R):
                 x.wis = x.wis + 1
                 asis = asis + 1
                 carry = True
-        tttsecondary = asis
+        ttt[1] = asis
 
     elif x.secondary  == "cha":
         if carry:
@@ -929,7 +936,7 @@ def PrintTTT(x, F, R):
                 x.cha = x.cha + 1
                 asis = asis + 1
                 carry = True
-        tttsecondary = asis
+        ttt[1] = asis
 
     if x.tertiary  == "str":
         if carry:
@@ -943,7 +950,7 @@ def PrintTTT(x, F, R):
                 x.str = x.str + 1
                 asis = asis + 1
                 carry = True
-        ttttertiary = asis
+        ttt[2] = asis
 
     elif x.tertiary  == "dex":
         if carry:
@@ -957,7 +964,7 @@ def PrintTTT(x, F, R):
                 x.dex = x.dex + 1
                 asis = asis + 1
                 carry = True
-        ttttertiary = asis
+        ttt[2] = asis
 
     elif x.tertiary  == "con":
         if carry:
@@ -971,7 +978,7 @@ def PrintTTT(x, F, R):
                 x.con = x.con + 1
                 asis = asis + 1
                 carry = True
-        ttttertiary = asis
+        ttt[2] = asis
 
     elif x.tertiary  == "int":
         if carry:
@@ -985,7 +992,7 @@ def PrintTTT(x, F, R):
                 x.int = x.int + 1
                 asis = asis + 1
                 carry = True
-        ttttertiary = asis
+        ttt[2] = asis
 
     elif x.tertiary  == "wis":
         if carry:
@@ -999,7 +1006,7 @@ def PrintTTT(x, F, R):
                 x.wis = x.wis + 1
                 asis = asis + 1
                 carry = True
-        ttttertiary = asis
+        ttt[2] = asis
 
     elif x.tertiary  == "cha":
         if carry:
@@ -1013,14 +1020,108 @@ def PrintTTT(x, F, R):
                 x.cha = x.cha + 1
                 asis = asis + 1
                 carry = True
-        ttttertiary = asis
+        ttt[2] = asis
 
-    if F == False and R == False:
-        if tttprimary == asimax:
-            print("20 " + x.primary + " will be reached at lv 20")
-        #elif
+    if F == False and R == False:#Most classes
+        if ttt[0] == asimax:
+            print("20 " + x.primary + " will be reached at lv 19")
+        else:
+            print("20 " + x.primary + " will be reached at lv " + str(ttt[0] * 4))
+
+        if ttt[1] == asimax:
+            print("20 " + x.secondary + " will be reached at lv 19")
+        elif ttt[1] != 0:
+            print("20 " + x.secondary + " will be reached at lv " + str(ttt[1] * 4))
+
+        if ttt[2] == asimax:
+            print("20 " + x.tertiary + " will be reached at lv 19")
+        elif ttt[2] != 0:
+            print("20 " + x.tertiary + " will be reached at lv " + str(ttt[2] * 4))
+        
+    elif F:#Fighter. Gets additional ASIs at 6 & 14
+        if ttt[0] == 1:
+            print("20 " + x.primary + " will be reached at lv 4")
+        elif ttt[0] == 2:
+            print("20 " + x.primary + " will be reached at lv 6")
+        elif ttt[0] == 3:
+            print("20 " + x.primary + " will be reached at lv 8")
+        elif ttt[0] == 4:
+            print("20 " + x.primary + " will be reached at lv 12")
+        elif ttt[0] == 5:
+            print("20 " + x.primary + " will be reached at lv 14")
+        elif ttt[0] == 6:
+            print("20 " + x.primary + " will be reached at lv 16")
+        elif ttt[0] == 7:
+            print("20 " + x.primary + " will be reached at lv 19")
+        
+        if ttt[1] == 1:
+            print("20 " + x.secondary + " will be reached at lv 4")
+        elif ttt[1] == 2:
+            print("20 " + x.secondary + " will be reached at lv 6")
+        elif ttt[1] == 3:
+            print("20 " + x.secondary + " will be reached at lv 8")
+        elif ttt[1] == 4:
+            print("20 " + x.secondary + " will be reached at lv 12")
+        elif ttt[1] == 5:
+            print("20 " + x.secondary + " will be reached at lv 14")
+        elif ttt[1] == 6:
+            print("20 " + x.secondary + " will be reached at lv 16")
+        elif ttt[1] == 7:
+            print("20 " + x.secondary + " will be reached at lv 19")
+
+        if ttt[2] == 1:
+            print("20 " + x.tertiary + " will be reached at lv 4")
+        elif ttt[2] == 2:
+            print("20 " + x.tertiary + " will be reached at lv 6")
+        elif ttt[2] == 3:
+            print("20 " + x.tertiary + " will be reached at lv 8")
+        elif ttt[2] == 4:
+            print("20 " + x.tertiary + " will be reached at lv 12")
+        elif ttt[2] == 5:
+            print("20 " + x.tertiary + " will be reached at lv 14")
+        elif ttt[2] == 6:
+            print("20 " + x.tertiary + " will be reached at lv 16")
+        elif ttt[2] == 7:
+            print("20 " + x.tertiary + " will be reached at lv 19")
+
+    elif R:#Rogue. Gets additional ASI at 10
+        if ttt[0] == 1:
+            print("20 " + x.primary + " will be reached at lv 4")
+        elif ttt[0] == 2:
+            print("20 " + x.primary + " will be reached at lv 8")
+        elif ttt[0] == 3:
+            print("20 " + x.primary + " will be reached at lv 10")
+        elif ttt[0] == 4:
+            print("20 " + x.primary + " will be reached at lv 12")
+        elif ttt[0] == 5:
+            print("20 " + x.primary + " will be reached at lv 16")
+        elif ttt[0] == 6:
+            print("20 " + x.primary + " will be reached at lv 19")
+        
+        if ttt[1] == 1:
+            print("20 " + x.secondary + " will be reached at lv 4")
+        elif ttt[1] == 2:
+            print("20 " + x.secondary + " will be reached at lv 8")
+        elif ttt[1] == 3:
+            print("20 " + x.secondary + " will be reached at lv 10")
+        elif ttt[1] == 4:
+            print("20 " + x.secondary + " will be reached at lv 12")
+        elif ttt[1] == 5:
+            print("20 " + x.secondary + " will be reached at lv 16")
+        elif ttt[1] == 6:
+            print("20 " + x.secondary + " will be reached at lv 19")
+
+        if ttt[2] == 1:
+            print("20 " + x.tertiary + " will be reached at lv 4")
+        elif ttt[2] == 2:
+            print("20 " + x.tertiary + " will be reached at lv 8")
+        elif ttt[2] == 3:
+            print("20 " + x.tertiary + " will be reached at lv 10")
+        elif ttt[2] == 4:
+            print("20 " + x.tertiary + " will be reached at lv 12")
+        elif ttt[2] == 5:
+            print("20 " + x.tertiary + " will be reached at lv 16")
+        elif ttt[2] == 6:
+            print("20 " + x.tertiary + " will be reached at lv 19")
+    return ttt
             
-
-
-
-#next
