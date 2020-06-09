@@ -186,6 +186,6 @@ def PrintLeftovers(x):
         elif x.tertiary != "none":#sensible build chosen, 15, 15, 13
             print("12, 8, 8\n")
     
-    print("Or anything else in-between!\n")
+        print("Or anything else in-between!\n")
 
 
