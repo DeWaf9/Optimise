@@ -38,7 +38,7 @@ def GetAttrScores(x):
     elif x.primary == "cha":
         x.cha = 15
         x.pool = x.pool - 9
-
+    
     if x.secondary == "str":
         x.str = 15 #highest number for 2nd pref
         x.pool = x.pool - 9
@@ -57,7 +57,7 @@ def GetAttrScores(x):
     elif x.secondary == "cha":
         x.cha = 15
         x.pool = x.pool - 9
-
+    
     if x.tertiary == "str":
         x.str = 13 #2nd highest number for 3rd pref
         x.pool = x.pool - 5
@@ -76,7 +76,7 @@ def GetAttrScores(x):
     elif x.tertiary == "cha":
         x.cha = 13
         x.pool = x.pool - 5
-
+    
     return x    
 
 def GetAttrScores2(x):
@@ -100,7 +100,7 @@ def GetAttrScores2(x):
     elif x.primary == "cha":
         x.cha = 15
         x.pool = x.pool - 9
-
+    
     if x.secondary == "str":
         x.str = 15 #highest number for 2nd pref
         x.pool = x.pool - 9
@@ -119,7 +119,7 @@ def GetAttrScores2(x):
     elif x.secondary == "cha":
         x.cha = 15
         x.pool = x.pool - 9
-
+    
     if x.tertiary == "str":
         x.str = 15 # highest number for 3rd pref
         x.pool = x.pool - 9
@@ -138,7 +138,7 @@ def GetAttrScores2(x):
     elif x.tertiary == "cha":
         x.cha = 15
         x.pool = x.pool - 9
-
+    
     return x
     
 def AssignOtherScores(x):

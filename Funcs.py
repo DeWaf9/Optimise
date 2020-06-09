@@ -197,16 +197,10 @@ def GetRace(x, eb):
 
 
         elif x.secondary == "con":
-            if eb:
-                x.race = "Goliath or Half-Orc or Eberron Half-Orc"
-                print(x.race + " chosen!")
-                x.str = x.str + 2
-                x.con = x.con + 1
-            else:
-                x.race = "Goliath or Half-Orc"
-                print(x.race + " chosen!")
-                x.str = x.str + 2
-                x.con = x.con + 1
+            x.race = "Mountain Dwarf"
+            print(x.race + " chosen!")
+            x.str = x.str + 2
+            x.con = x.con + 2
 
 
         elif x.secondary == "int":
@@ -217,19 +211,14 @@ def GetRace(x, eb):
                 x.str = x.str + 2
                 x.dex = x.dex + 1
             elif x.tertiary == "con":
-                if eb:
-                    x.race = "Goliath or Half-Orc or Eberron Half-Orc"
-                    print(x.race + " chosen!")
-                    x.str = x.str + 2
-                    x.con = x.con + 1
-                else:
-                    x.race = "Goliath or Half-Orc"
-                    print(x.race + " chosen!")
-                    x.str = x.str + 2
-                    x.con = x.con + 1
+                x.race = "Mountain Dwarf"
+                print(x.race + " chosen!")
+                x.str = x.str + 2
+                x.con = x.con + 2
             elif x.tertiary == "wis":
                 print("Still no obvious choice based on tertiary preference... Using any Str-based class.")
                 x.race = "Bugbear or Longtooth Shifter or Goliath, or any Orc variant, or Dragonborn."
+                print(x.race)
                 x.str = x.str + 2
             elif x.tertiary == "cha":
                 x.race = "Dragonborn"
@@ -239,7 +228,9 @@ def GetRace(x, eb):
             else:
                 print("No tertiary choice! Using any Str-based class.")
                 x.race = "Bugbear or Longtooth Shifter or Goliath, or any Orc variant, or Dragonborn."
+                print(x.race)
                 x.str = x.str + 2
+
 
         elif x.secondary == "wis":
             print("No obvious choice based on secondary preference. Using tertiary to determine race...")
@@ -249,16 +240,14 @@ def GetRace(x, eb):
                 x.str = x.str + 2
                 x.dex = x.dex + 1
             elif x.tertiary == "con":
-                if eb:
-                    x.race = "Goliath or Half-Orc or Eberron Half-Orc"
-                else:
-                    x.race = "Goliath or Half-Orc"
+                x.race = "Mountain Dwarf"
                 print(x.race + " chosen!")
                 x.str = x.str + 2
-                x.con = x.con + 1
+                x.con = x.con + 2
             elif x.tertiary == "int":
                 print("Still no obvious choice based on tertiary preference... Using any Str-based class.")
                 x.race = "Bugbear or Longtooth Shifter or Goliath, or any Orc variant, or Dragonborn."
+                print(x.race)
                 x.str = x.str + 2
             elif x.tertiary == "cha":
                 x.race = "Dragonborn"
@@ -268,6 +257,7 @@ def GetRace(x, eb):
             else:
                 print("No tertiary choice! Using any Str-based class.")
                 x.race = "Bugbear or Longtooth Shifter or Goliath, or any Orc variant, or Dragonborn."
+                print(x.race)
                 x.str = x.str + 2
 
         
@@ -281,6 +271,7 @@ def GetRace(x, eb):
         else:
             print("No secondary choice! Using any Str-based class!")
             x.race = "Bugbear or Longtooth Shifter or Goliath, or any Orc variant, or Dragonborn."
+            print(x.race)
             x.str = x.str + 2
 
         
@@ -321,6 +312,7 @@ def GetRace(x, eb):
             else: 
                 print("No tertiary choice! Using any Dex-based class.")
                 x.race = "Tabaxi or Swifthide Strider or Any Elf or Any Halfling or Goblin or Aaracokra or Kenku"
+                print(x.race)
                 x.dex = x.dex + 2
 
 
@@ -369,10 +361,11 @@ def GetRace(x, eb):
             else:
                 print("No secondary choice! Using any Dex-based class")
                 x.race = "Tabaxi or Swifthide Strider or Any Elf or Any Halfling or Goblin or Aaracokra or Kenku"
+                print(x.race)
                 x.dex = x.dex + 2
 
 
-        elif eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned human mark of passage, do so.
+        if eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned human mark of passage, do so.
             print("Also consider Human Mark of Passage!")
             x.race = x.race + " or Human Mark of Passage"
 
@@ -381,7 +374,7 @@ def GetRace(x, eb):
 
 
         if x.secondary == "str":
-            x.race = "Mountain Dwarf, or Beasthide Shifter, or Earth Genasi"
+            x.race = "Mountain Dwarf"
             print(x.race + " chosen!")
             x.con = x.con + 2
             x.str = x.str + 2
@@ -449,6 +442,18 @@ def GetRace(x, eb):
                 x.con = x.con + 2
                 x.wis = x.wis + 1
 
+            
+            else:
+                if eb:
+                    print("No tertiary choice! Using Warforged")
+                    x.race = "Warforged"
+                    x.con = x.con + 2
+                else:
+                    print("No tertiary choice! Using any Con-based class")
+                    x.race = "Any Genasi, or Any Dwarf, or Hobgoblin, or Lizardfolk, or Beasthide Shifter"
+                    print(x.race)
+                    x.con = x.con + 2
+
         elif x.secondary == "none":#if no secondary chosen
             if eb:
                 print("No secondary choice! Using Warforged")
@@ -457,10 +462,11 @@ def GetRace(x, eb):
             else:
                 print("No secondary choice! Using any Con-based class")
                 x.race = "Any Genasi, or Any Dwarf, or Hobgoblin, or Lizardfolk, or Beasthide Shifter"
+                print(x.race)
                 x.con = x.con + 2
 
 
-        elif eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned warforged, do so.
+        if eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned warforged, do so.
             print("Also consider Warforged!")
             x.race = x.race + " or Warforged"
 
@@ -482,18 +488,6 @@ def GetRace(x, eb):
                 x.con = x.con + 1
 
 
-            elif x.tertiary == "wis":
-                if eb:
-                    x.race = "Human Mark of Making"
-                    print(x.race + " chosen!")
-                    x.int = x.int + 2
-                    x.wis = x.wis + 1
-                else:
-                    print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
-                    x.race = "Any Gnome"
-                    x.int = x.int + 2
-                    
-
             elif x.tertiary == "cha":
                 if eb:
                     x.race = "Gnome Mark of Scribing, or Human Mark of Making"
@@ -503,6 +497,19 @@ def GetRace(x, eb):
                 else:
                     print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
                     x.race = "Any Gnome"
+                    print(x.race)
+                    x.int = x.int + 2
+
+            else:#wisdom also has no obvious choice, this groups both wis & none case together
+                if eb:
+                    x.race = "Human Mark of Making"
+                    print(x.race + " chosen!")
+                    x.int = x.int + 2
+                    x.wis = x.wis + 1
+                else:
+                    print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
+                    x.race = "Any Gnome"
+                    print(x.race)
                     x.int = x.int + 2
                 
         
@@ -535,19 +542,7 @@ def GetRace(x, eb):
                 x.int = x.int + 2
                 x.con = x.con + 1
 
-
-            elif x.tertiary == "str":
-                if eb:
-                    x.race = "Human Mark of Making"
-                    print(x.race + " chosen!")
-                    x.int = x.int + 2
-                    x.str = x.str + 1
-                else:
-                    print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
-                    x.race = "Any Gnome"
-                    x.int = x.int + 2
-                    
-
+            
             elif x.tertiary == "cha":
                 if eb:
                     x.race = "Gnome Mark of Scribing, or Human Mark of Making"
@@ -558,6 +553,19 @@ def GetRace(x, eb):
                     print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
                     x.race = "Any Gnome"
                     x.int = x.int + 2
+
+
+            else:#no bovious choce for str, this does both
+                if eb:
+                    x.race = "Human Mark of Making"
+                    print(x.race + " chosen!")
+                    x.int = x.int + 2
+                    x.str = x.str + 1
+                else:
+                    print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
+                    x.race = "Any Gnome"
+                    print(x.race)
+                    x.int = x.int + 2 
 
         
         elif x.secondary == "cha":
@@ -583,16 +591,11 @@ def GetRace(x, eb):
                     x.con = x.con + 1
 
 
-                elif x.tertiary == "wis":
+                else:
                     print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
                     x.race = "Any Gnome"
                     x.int = x.int + 2
                     
-
-                elif x.tertiary == "str":
-                    print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
-                    x.race = "Any Gnome"
-                    x.int = x.int + 2
 
         elif x.secondary == "none":#if no secondary chosen
             if eb:
@@ -605,7 +608,7 @@ def GetRace(x, eb):
                 x.int = x.int + 2
 
 
-        elif eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned human mark of making, do so.
+        if eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned human mark of making, do so.
             print("Also consider Human Mark of Making!")
             x.race = x.race + " or Human Mark of Making"
 
@@ -646,9 +649,10 @@ def GetRace(x, eb):
                     x.dex = x.dex + 1
 
                 else:
-                    print("Still no obvious choice based on tertiary preference... Using any Wis-based class.")
+                    print("Still no obvious choice based on tertiary preference, or no preference selected... Using any Wis-based class.")
                     x.race = "Firbolg, or Wildhunt Shifter"
-                    x.int = x.int + 2
+                    print(x.race)
+                    x.wis = x.wis + 2
         
 
         elif x.secondary == "int":
@@ -672,9 +676,10 @@ def GetRace(x, eb):
                     x.dex = x.dex + 1
 
                 else:
-                    print("Still no obvious choice based on tertiary preference... Using any Wis-based class.")
+                    print("Still no obvious choice based on tertiary preference, or no preference selected... Using any Wis-based class.")
                     x.race = "Firbolg, or Wildhunt Shifter"
-                    x.int = x.int + 2
+                    print(x.race)
+                    x.wis = x.wis + 2
 
         elif x.secondary == "cha":
             if eb:
@@ -697,30 +702,31 @@ def GetRace(x, eb):
                     x.dex = x.dex + 1
 
                 else:
-                    print("Still no obvious choice based on tertiary preference... Using any Wis-based class.")
+                    print("Still no obvious choice based on tertiary preference, or no preference selected... Using any Wis-based class.")
                     x.race = "Firbolg, or Wildhunt Shifter"
-                    x.int = x.int + 2
+                    x.wis = x.wis + 2
 
         elif x.secondary == "none":#if no secondary chosen
             if eb:
                 print("No secondary choice! Using Human Mark of Handling or Half-Elf Mark of Detection")
-                x.race = "Human Mark of Making"
-                x.int = x.int + 2
+                x.race = "Human Mark of Handling, or Half-Elf Mark of Detection"
+                x.wis = x.wis + 2
             else:
-                print("No secondary choice! Using any Int-based class")
-                x.race = "Any Gnome"
-                x.int = x.int + 2
+                print("No secondary choice! Using any Wis-based class")
+                x.race = "Firbolg, or Wildhunt Shifter"
+                print(x.race)
+                x.wis = x.wis + 2
 
 
-        elif eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned human mark of making, do so.
-            print("Also consider Human Mark of Making!")
-            x.race = x.race + " or Human Mark of Making"
+        if eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned these races, do so.
+            print("Also consider Human Mark of Handling, or Half-Elf Mark of Detection!")
+            x.race = x.race + " or Human Mark of Handling, or Half-Elf Mark of Detection"
 
 
     elif x.primary == "cha": #Charisma primary
 
         if x.secondary == "str":
-            x.race = "Falles Aasimar, or Half-Elf"
+            x.race = "Fallen Aasimar, or Half-Elf"
             print(x.race + " chosen!")
             x.cha = x.cha + 2
             x.str = x.str + 1
@@ -735,7 +741,7 @@ def GetRace(x, eb):
             else:
                 x.race = "Half-Elf"
                 print(x.race + " chosen!")
-                x.wis = x.wis + 2
+                x.cha = x.cha + 2
                 x.dex = x.dex + 1
 
         
@@ -754,7 +760,7 @@ def GetRace(x, eb):
 
         
         elif x.secondary == "wis":
-            x.race = "Protector Aassimar, or Half-Elf"
+            x.race = "Protector Aasimar, or Half-Elf"
             print(x.race + " chosen!")
             x.cha = x.cha + 2
             x.wis = x.wis + 1
@@ -768,10 +774,11 @@ def GetRace(x, eb):
             else:
                 print("No secondary choice! Using any Cha-based class")
                 x.race = "Half-Elf, or Any Aasimar"
+                print(x.race)
                 x.cha = x.cha + 2
 
 
-        elif eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned changeling, do so.
+        if eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned changeling, do so.
             print("Also consider Changeling")
             x.race = x.race + " or Changeling"
 
@@ -779,15 +786,19 @@ def GetRace(x, eb):
 
 def PrintTTT(x, F, R):
     """Prints Time To Twenty for each preference"""
+
     ttt = [0, 0, 0]#record # of asi's it took to get to 20 for primary, secondary & tertiary preferences
-    asis = 0#counts # of ASIs
+    asis = 0#running count of # of ASIs
+
     asimax = 5#Set different limits for max ASIs based on class
     if F:
         asimax = 7#fighters get 2 more ASIs
     elif R:
         asimax = 6#rogues get 1 more ASI
-    carry = False#Detects whether there's a carry over from the previous preference. Eg: an ASI would take an attribute from 19 -> 21. Instead, makes that 20, and makes carry True.
-    #Then in the next preference section we add 1 to that attribute
+    carry = False
+    #Carry detects whether there's a carry over from the previous preference. Eg: an ASI would take an attribute from 19 -> 21.
+    # Instead, makes that 20, and makes carry True. Then in the next preference section we add 1 to that attribute
+
     if x.primary  == "str":
         while x.str < 20 and asis < asimax:
             if x.str + 2 <= 20:
@@ -866,7 +877,11 @@ def PrintTTT(x, F, R):
                 x.str = x.str + 1
                 asis = asis + 1
                 carry = True
-        ttt[1] = asis
+        if x.str == 20:#figure out why the loop stopped & make changes accordingly
+            ttt[1] = asis#if attribute == 20, set ttt to the # of ASIs it took
+        else:#if attribute isn't 20, then we reached max # of ASIs without hitting 20 attribute
+            ttt[1] = "20 str unable to be reached. Will reach " + str(x.str) + " str at lv 19"
+        #set it to a string so we can just check if ttt[1] is a string at the end of this function and print it.
 
     elif x.secondary  == "dex":
         if carry:
@@ -880,7 +895,10 @@ def PrintTTT(x, F, R):
                 x.dex = x.dex + 1
                 asis = asis + 1
                 carry = True
-        ttt[1] = asis
+        if x.dex == 20:
+            ttt[1] = asis
+        else:
+            ttt[1] = "20 dex unable to be reached. Will reach " + str(x.dex) + " dex at lv 19"
 
     elif x.secondary  == "con":
         if carry:
@@ -894,7 +912,10 @@ def PrintTTT(x, F, R):
                 x.con = x.con + 1
                 asis = asis + 1
                 carry = True
-        ttt[1] = asis
+        if x.con == 20:
+            ttt[1] = asis
+        else:
+            ttt[1] = "20 con unable to be reached. Will reach " + str(x.con) + " con at lv 19"
 
     elif x.secondary  == "int":
         if carry:
@@ -908,7 +929,10 @@ def PrintTTT(x, F, R):
                 x.int = x.int + 1
                 asis = asis + 1
                 carry = True
-        ttt[1] = asis
+        if x.int == 20:
+            ttt[1] = asis
+        else:
+            ttt[1] = "20 int unable to be reached. Will reach " + str(x.int) + " int at lv 19"
 
     elif x.secondary  == "wis":
         if carry:
@@ -922,7 +946,10 @@ def PrintTTT(x, F, R):
                 x.wis = x.wis + 1
                 asis = asis + 1
                 carry = True
-        ttt[1] = asis
+        if x.wis == 20:
+            ttt[1] = asis
+        else:
+            ttt[1] = "20 wis unable to be reached. Will reach " + str(x.wis) + " wis at lv 19"
 
     elif x.secondary  == "cha":
         if carry:
@@ -936,7 +963,10 @@ def PrintTTT(x, F, R):
                 x.cha = x.cha + 1
                 asis = asis + 1
                 carry = True
-        ttt[1] = asis
+        if x.cha == 20:
+            ttt[1] = asis
+        else:
+            ttt[1] = "20 cha unable to be reached. Will reach " + str(x.cha) + " cha at lv 19"
 
     if x.tertiary  == "str":
         if carry:
@@ -950,7 +980,10 @@ def PrintTTT(x, F, R):
                 x.str = x.str + 1
                 asis = asis + 1
                 carry = True
-        ttt[2] = asis
+        if x.str == 20:
+            ttt[2] = asis
+        else:
+            ttt[2] = "20 str unable to be reached. Will reach " + str(x.str) + " str at lv 19"
 
     elif x.tertiary  == "dex":
         if carry:
@@ -964,7 +997,10 @@ def PrintTTT(x, F, R):
                 x.dex = x.dex + 1
                 asis = asis + 1
                 carry = True
-        ttt[2] = asis
+        if x.dex == 20:
+            ttt[2] = asis
+        else:
+            ttt[2] = "20 dex unable to be reached. Will reach " + str(x.dex) + " dex at lv 19"
 
     elif x.tertiary  == "con":
         if carry:
@@ -978,7 +1014,10 @@ def PrintTTT(x, F, R):
                 x.con = x.con + 1
                 asis = asis + 1
                 carry = True
-        ttt[2] = asis
+        if x.con == 20:
+            ttt[2] = asis
+        else:
+            ttt[2] = "20 con unable to be reached. Will reach " + str(x.con) + " con at lv 19"
 
     elif x.tertiary  == "int":
         if carry:
@@ -992,7 +1031,10 @@ def PrintTTT(x, F, R):
                 x.int = x.int + 1
                 asis = asis + 1
                 carry = True
-        ttt[2] = asis
+        if x.int == 20:
+            ttt[2] = asis
+        else:
+            ttt[2] = "20 int unable to be reached. Will reach " + str(x.int) + " int at lv 19"
 
     elif x.tertiary  == "wis":
         if carry:
@@ -1006,7 +1048,10 @@ def PrintTTT(x, F, R):
                 x.wis = x.wis + 1
                 asis = asis + 1
                 carry = True
-        ttt[2] = asis
+        if x.wis == 20:
+            ttt[2] = asis
+        else:
+            ttt[2] = "20 wis unable to be reached. Will reach " + str(x.wis) + " wis at lv 19"
 
     elif x.tertiary  == "cha":
         if carry:
@@ -1020,7 +1065,10 @@ def PrintTTT(x, F, R):
                 x.cha = x.cha + 1
                 asis = asis + 1
                 carry = True
-        ttt[2] = asis
+        if x.cha == 20:
+            ttt[2] = asis
+        else:
+            ttt[2] = "20 cha unable to be reached. Will reach " + str(x.cha) + " cha at lv 19"
 
     if F == False and R == False:#Most classes
         if ttt[0] == asimax:
@@ -1030,13 +1078,21 @@ def PrintTTT(x, F, R):
 
         if ttt[1] == asimax:
             print("20 " + x.secondary + " will be reached at lv 19")
+        elif isinstance(ttt[1],str):#if 20 attribute wasn't reached, print the string we set it to
+            print(ttt[1])
         elif ttt[1] != 0:
             print("20 " + x.secondary + " will be reached at lv " + str(ttt[1] * 4))
+        elif ttt[1] == 0 and x.secondary != "none":
+            print(x.secondary + " will not be able to increase.")#if lv 20 brings us just to 20 score of the primary attribute 
 
         if ttt[2] == asimax:
             print("20 " + x.tertiary + " will be reached at lv 19")
+        elif isinstance(ttt[2],str):
+            print(ttt[2])
         elif ttt[2] != 0:
             print("20 " + x.tertiary + " will be reached at lv " + str(ttt[2] * 4))
+        elif ttt[2] == 0 and x.tertiary != "none":
+            print(x.tertiary + " will not be able to increase.")
         
     elif F:#Fighter. Gets additional ASIs at 6 & 14
         if ttt[0] == 1:
@@ -1054,7 +1110,9 @@ def PrintTTT(x, F, R):
         elif ttt[0] == 7:
             print("20 " + x.primary + " will be reached at lv 19")
         
-        if ttt[1] == 1:
+        if ttt[1] == 0 and x.secondary != "none":
+            print( x.secondary + " will not be able to increase.")
+        elif ttt[1] == 1:
             print("20 " + x.secondary + " will be reached at lv 4")
         elif ttt[1] == 2:
             print("20 " + x.secondary + " will be reached at lv 6")
@@ -1068,8 +1126,12 @@ def PrintTTT(x, F, R):
             print("20 " + x.secondary + " will be reached at lv 16")
         elif ttt[1] == 7:
             print("20 " + x.secondary + " will be reached at lv 19")
+        elif isinstance(ttt[1],str):
+            print(ttt[1])
 
-        if ttt[2] == 1:
+        if ttt[1] == 0 and x.tertiary != "none":
+            print( x.tertiary + " will not be able to increase.")
+        elif ttt[2] == 1:
             print("20 " + x.tertiary + " will be reached at lv 4")
         elif ttt[2] == 2:
             print("20 " + x.tertiary + " will be reached at lv 6")
@@ -1083,6 +1145,8 @@ def PrintTTT(x, F, R):
             print("20 " + x.tertiary + " will be reached at lv 16")
         elif ttt[2] == 7:
             print("20 " + x.tertiary + " will be reached at lv 19")
+        elif isinstance(ttt[2],str):
+            print(ttt[2])
 
     elif R:#Rogue. Gets additional ASI at 10
         if ttt[0] == 1:
@@ -1098,6 +1162,8 @@ def PrintTTT(x, F, R):
         elif ttt[0] == 6:
             print("20 " + x.primary + " will be reached at lv 19")
         
+        if ttt[1] == 0 and x.secondary != "none":
+            print( x.secondary + " will not be able to increase.")
         if ttt[1] == 1:
             print("20 " + x.secondary + " will be reached at lv 4")
         elif ttt[1] == 2:
@@ -1110,7 +1176,11 @@ def PrintTTT(x, F, R):
             print("20 " + x.secondary + " will be reached at lv 16")
         elif ttt[1] == 6:
             print("20 " + x.secondary + " will be reached at lv 19")
+        elif isinstance(ttt[1],str):
+            print(ttt[1])
 
+        if ttt[2] == 0 and x.tertiary != "none":
+            print( x.tertiary + " will not be able to increase.")
         if ttt[2] == 1:
             print("20 " + x.tertiary + " will be reached at lv 4")
         elif ttt[2] == 2:
@@ -1123,5 +1193,8 @@ def PrintTTT(x, F, R):
             print("20 " + x.tertiary + " will be reached at lv 16")
         elif ttt[2] == 6:
             print("20 " + x.tertiary + " will be reached at lv 19")
+        elif isinstance(ttt[2],str):
+            print(ttt[2])
+    
     return ttt
             
