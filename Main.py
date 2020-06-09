@@ -110,3 +110,4 @@ input("")
 #extend point buy attribute score preference to have more freedom than: 15, 15, 15 or 15, 15, 13.
 #give user choice on non-preffered attribute scores to provide full picture
 #give user choice to reserve some ASI levles for feats, and skip those levels in FuncsTTT()
+#create GUI
