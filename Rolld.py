@@ -85,7 +85,7 @@ def GetAttrScores(x):
         
         return x
 
-def AssignOtherScores(x):
+def XOtherScores(x):
     """Cleans up other attribute scores"""
     if x.str == 0:#if we haven't changed a score from it's default, we don't care about it. Change it to "X" for the time being.
         x.str = " X"
@@ -107,10 +107,91 @@ def AssignOtherScores(x):
 
     return x
 
+def AssignOtherScores(x):
+    """Assigns non-preffered attribute scores"""
+
+    PrintLeftovers(x)
+
+    if x.secondary == "none":#if only primary preference exists, start from the start, we have to assign all 5 attributes
+        count = 0
+    elif x.tertiary == "none":#if secondary preference also exists, start one in, we only have to assign 4
+        count = 1
+    else:#if they've picked all 3 preferences, we only have to assign 3
+        count = 2
+        
+    while count < 5:#loop until we've finished assigning, until index goes beyond the array
+
+        print("What attribute should receive score " + str(max(x.stats)) + " ?")
+        attr = input(":")
+        attr = attr.lower()
+
+        if attr == "str" or attr == "strength":
+            if x.str == 0:#checking it's not allocated already
+                x.str = max(x.stats)#uses max from the stats list, similar to GetAttrScores()
+                x.stats[x.stats.index(x.str)] = 0
+                count = count + 1 #increases count
+                print(attr + " assigned!")
+            else:
+                print("Attribute already assigned! Please choose another!")
+
+        elif attr == "dex" or attr == "dexterity":
+            if x.dex == 0:
+                x.dex = max(x.stats)
+                x.stats[x.stats.index(x.dex)] = 0
+                count = count + 1
+                print(attr + " assigned!")
+            else:
+                print("Attribute already assigned! Please choose another!")
+
+        elif attr == "con" or attr == "consitution":
+            if x.con == 0:
+                x.con = max(x.stats)
+                x.stats[x.stats.index(x.con)] = 0
+                count = count + 1
+                print(attr + " assigned!")
+            else:
+                print("Attribute already assigned! Please choose another!")
+
+        elif attr == "int" or attr == "intelligence":
+            if x.int == 0:
+                x.int = max(x.stats)
+                x.stats[x.stats.index(x.int)] = 0
+                count = count + 1
+                print(attr + " assigned!")
+            else:
+                print("Attribute already assigned! Please choose another!")
+
+        elif attr == "wis" or attr == "wisdom":
+            if x.wis == 0:
+                x.wis = max(x.stats)
+                x.stats[x.stats.index(x.wis)] = 0
+                count = count + 1
+                print(attr + " assigned!")
+            else:
+                print("Attribute already assigned! Please choose another!")
+
+        elif attr == "cha" or attr == "charisma":
+            if x.cha == 0:
+                x.cha = max(x.stats)
+                x.stats[x.stats.index(x.cha)] = 0
+                count = count + 1
+                print(attr + " assigned!")
+            else:
+                print("Attribute already assigned! Please choose another!")
+
+        else:
+            print("That doesn\'t look like an attribute. Write either the full word, or abbreviation:")
+
+    return x
+
 def PrintLeftovers(x):
     """Simply prints leftover scores in no particular order"""
-    for i in x.stats:
+
+    print("\nYour leftover attribute scores are:")
+    i = 0
+    while i < 6:
         if x.stats[i] != 0:
-            print(i + ",")
+            print(str(x.stats[i]) + ",")
+        i = i + 1
     print("\n")
     

@@ -178,9 +178,13 @@ def GetAttrPref(x):
 
 def PrintAttr(x):
     """Prints a nice table for attribute scores"""
+
+    #A lot of garbage going on below, it's just padding so that everything lines up
+
     print("\n+-----------------------------------+")
     print("| STR | DEX | CON | INT | WIS | CHA |")
-    print("| " + str(x.str) + "  | " + str(x.dex) + "  | " + str(x.con) + "  | " + str(x.int) + "  | " + str(x.wis) + "  | " + str(x.cha) + "  |")
+    print("| " + str(x.str).rjust(2) + "  | " + str(x.dex).rjust(2) + "  | " + str(x.con).rjust(2) + "  | "
+     + str(x.int).rjust(2) + "  | " + str(x.wis).rjust(2) + "  | " + str(x.cha).rjust(2) + "  |")
     print("+-----------------------------------+\n")
 
 def GetRace(x, eb):

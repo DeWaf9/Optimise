@@ -1,8 +1,8 @@
 ##!/usr/bin/env python
-#Optimise.py
+#Main.py
 
 import Funcs
-print("\n\n\nWelcome to Optimise.py!")
+print("\n\n\nWelcome to Optimise!")
 print("What method of score generation are you using?")
 print("1 - Standard Array \n2 - Point Buy \n3 - Rolled \n")
 
@@ -23,7 +23,7 @@ while awaiting:#grabs score generation method, this changes what class is import
         awaiting = False
         import Rolld as method
     else:
-        print("Didn't understand input. Try again:")
+        print("Didn\'t understand input. Please try again:")
 
 user = method.character()#creates character object
 
@@ -34,22 +34,41 @@ if genmethod == "2" and user.tertiary != "none": #Choice in point-buy: all 3 pre
     print("Seeing as you've chosen Point Buy...")
     print("How Min-Max-y are we talking?")
     print("Sensible or MAD?")
-    sillyness = input(":")
-    sillyness = sillyness.lower() #drops everything to lowercase for easier string comparison
+    awaiting = True
+    while awaiting:
+        sillyness = input(":")
+        sillyness = sillyness.lower() #drops everything to lowercase for easier string comparison
 
-    if sillyness == "sensible":
-        user = method.GetAttrScores(user)#Assigns attribute scores based on preferences: 15, 15, 13
-    elif sillyness == "mad":
-        user = method.GetAttrScores2(user)#Assigns attribute scores based on preferences: 15, 15, 15
+        if sillyness == "sensible":
+            user = method.GetAttrScores(user)#Assigns attribute scores based on preferences: 15, 15, 13
+            awaiting = False
+        elif sillyness == "mad":
+            user = method.GetAttrScores2(user)#Assigns attribute scores based on preferences: 15, 15, 15
+            awaiting = False
+        else:
+           print("Didn\'t understand input. Please try again:")
 else:
     user = method.GetAttrScores(user)#No choice needed for other 2 methods
 
-user = method.AssignOtherScores(user)#Assign "X" for non-preffered scores
+
+awaiting = True#Gives users choice on their non-preffered scores
+print("\nWould you like to assign your other attribute scores?")
+while awaiting:
+    assign = input(":")
+    assign = assign.lower()
+
+    if assign == "y" or assign == "yes" or assign == "yeah":
+        user = method.AssignOtherScores(user)#Launch manual assignment method
+        awaiting = False
+    elif assign == "n" or assign == "no" or assign == "nah":
+        user = method.XOtherScores(user)#Assign generic "X"
+        method.PrintLeftovers(user)
+        awaiting = False
+    else:
+        print("Didn\'t understand input. Please try again:")
 
 print("Current attribute scores:")
 Funcs.PrintAttr(user)#ascii art of current configuration
-print("Leftover scores:")
-method.PrintLeftovers(user)#Shows leftover scores
 
 awaiting = True
 print("Include Eberron content?")# includes eberron orc, changeling, warforged & dragonmarked races
@@ -68,7 +87,7 @@ while awaiting:
 print("Determining optimum race...")
 user = Funcs.GetRace(user, eb)#Goes through dozens of if/else statements and can use Eberron races
 
-print("Updated attribute scores:")
+print("Attribute scores after racial bonuses:")
 Funcs.PrintAttr(user)#ascii art of current configuration
 
 print("Preparing to calculate level required for 20 score.")
@@ -106,8 +125,9 @@ input("")
 
 #FUTURE IMPLEMENTATION:
 #suggest other races given tertiary and secondary preferences
-#print other features of selected races to provide a more informed deicion
-#extend point buy attribute score preference to have more freedom than: 15, 15, 15 or 15, 15, 13.
-#give user choice on non-preffered attribute scores to provide full picture
-#give user choice to reserve some ASI levles for feats, and skip those levels in FuncsTTT()
+#print other features of selected races to provide a more informed descision
+#extend point buy attribute score preference to choose manually
+#DONEgive user choice on non-preffered attribute scores to provide full picture
+#give user choice to reserve some ASI levels for feats, and skip those levels in FuncsTTT()
+#add MToF races: shadar-kai, gith, and add human reccomendations?
 #create GUI
