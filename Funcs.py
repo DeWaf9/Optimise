@@ -208,32 +208,10 @@ def GetRace(x, eb):
 
 
         elif x.secondary == "int":
-            print("No obvious choice based on secondary preference. Using tertiary to determine race...")
-            if x.tertiary == "dex":
-                x.race = "Bugbear or Longtooth Shifter"
-                print(x.race + " chosen!")
-                x.str = x.str + 2
-                x.dex = x.dex + 1
-            elif x.tertiary == "con":
-                x.race = "Mountain Dwarf"
-                print(x.race + " chosen!")
-                x.str = x.str + 2
-                x.con = x.con + 2
-            elif x.tertiary == "wis":
-                print("Still no obvious choice based on tertiary preference... Using any Str-based class.")
-                x.race = "Bugbear or Longtooth Shifter or Goliath, or any Orc variant, or Dragonborn."
-                print(x.race)
-                x.str = x.str + 2
-            elif x.tertiary == "cha":
-                x.race = "Dragonborn"
-                print(x.race + " chosen!")
-                x.str = x.str + 2
-                x.cha = x.cha + 1
-            else:
-                print("No tertiary choice! Using any Str-based class.")
-                x.race = "Bugbear or Longtooth Shifter or Goliath, or any Orc variant, or Dragonborn."
-                print(x.race)
-                x.str = x.str + 2
+            x.race = "Githyanki"
+            print(x.race + " chosen!")
+            x.str = x.str + 2
+            x.int = x.int + 2
 
 
         elif x.secondary == "wis":
@@ -249,10 +227,10 @@ def GetRace(x, eb):
                 x.str = x.str + 2
                 x.con = x.con + 2
             elif x.tertiary == "int":
-                print("Still no obvious choice based on tertiary preference... Using any Str-based class.")
-                x.race = "Bugbear or Longtooth Shifter or Goliath, or any Orc variant, or Dragonborn."
-                print(x.race)
+                x.race = "Githyanki"
+                print(x.race + " chosen!")
                 x.str = x.str + 2
+                x.int = x.int + 2
             elif x.tertiary == "cha":
                 x.race = "Dragonborn"
                 print(x.race + " chosen!")
@@ -285,7 +263,7 @@ def GetRace(x, eb):
         if x.secondary == "str":
             print("No obvious choice for primary & secondary preference. Using tertiary to determine race...")
             if x.tertiary == "con":
-                x.race = "Sea Elf or Goblin or Stout Halfling"
+                x.race = "Sea Elf or Goblin or Stout Halfling, or Shadar-Kai"
                 print(x.race + " chosen!")
                 x.dex = x.dex + 2
                 x.con = x.con + 1
@@ -321,7 +299,7 @@ def GetRace(x, eb):
 
 
         elif x.secondary == "con":
-            x.race = "Sea Elf or Goblin or Stout Halfling"
+            x.race = "Sea Elf or Goblin or Stout Halfling, or Shadar-Kai"
             print(x.race + " chosen!")
             x.dex = x.dex + 2
             x.con = x.con + 1
@@ -661,29 +639,15 @@ def GetRace(x, eb):
 
         elif x.secondary == "int":
             if eb:
-                x.race = "Half-Elf Mark of Detection or Human Mark of Handling"
+                x.race = "Half-Elf Mark of Detection or Human Mark of Handling, or Githzerai"
                 print(x.race + " chosen!")
                 x.wis = x.wis + 2
                 x.int = x.int + 1
             else:
-                print("No obvious choice for primary & secondary preference. Using tertiary to determine race...")
-                if x.tertiary == "str":
-                    x.race = "Firbolg"
-                    print(x.race + " chosen!")
-                    x.wis = x.wis + 2
-                    x.str = x.str + 1
-
-                elif x.tertiary == "dex":
-                    x.race = "Wildhunt Shifter"
-                    print(x.race + " chosen!")
-                    x.wis = x.wis + 2
-                    x.dex = x.dex + 1
-
-                else:
-                    print("Still no obvious choice based on tertiary preference, or no preference selected... Using any Wis-based class.")
-                    x.race = "Firbolg, or Wildhunt Shifter"
-                    print(x.race)
-                    x.wis = x.wis + 2
+                x.race = "Githzerai"
+                print(x.race + " chosen!")
+                x.wis = x.wis + 2
+                x.int = x.int + 2
 
         elif x.secondary == "cha":
             if eb:
@@ -704,6 +668,12 @@ def GetRace(x, eb):
                     print(x.race + " chosen!")
                     x.wis = x.wis + 2
                     x.dex = x.dex + 1
+
+                elif x.tertiary == "int":
+                    x.race = "Githzerai"
+                    print(x.race + "chosen!")
+                    x.wis = x.wis + 2
+                    x.int = x.int + 1
 
                 else:
                     print("Still no obvious choice based on tertiary preference, or no preference selected... Using any Wis-based class.")

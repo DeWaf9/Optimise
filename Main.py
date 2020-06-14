@@ -124,10 +124,10 @@ print("\n\nEnd of function. Press Enter to close.")
 input("")
 
 #FUTURE IMPLEMENTATION:
-#suggest other races given tertiary and secondary preferences
-#print other features of selected races to provide a more informed descision
+#print other features of selected races to provide a more informed decision
 #extend point buy attribute score preference to choose manually
-#DONEgive user choice on non-preffered attribute scores to provide full picture
+#DONE give user choice on non-preffered attribute scores to provide full picture
 #give user choice to reserve some ASI levels for feats, and skip those levels in FuncsTTT()
-#add MToF races: shadar-kai, gith, and add human reccomendations?
+#DONE add MToF races
+#add human reccomendations
 #create GUI
