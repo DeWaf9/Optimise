@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Optimise.py'],
-             pathex=['C:\\Users\\XCK746\\Desktop\\Optimise'],
+             pathex=['C:\\Users\\XCK746\\Documents\\GitHub\\Optimise'],
              binaries=[],
              datas=[],
              hiddenimports=[],
