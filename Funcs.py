@@ -179,7 +179,7 @@ def GetAttrPref(x):
 def PrintAttr(x):
     """Prints a nice table for attribute scores"""
 
-    #A lot of garbage going on below, it's just padding so that everything lines up
+    #A lot of garbage going on below, .rjust() is padding so that everything lines up
 
     print("\n+-----------------------------------+")
     print("| STR | DEX | CON | INT | WIS | CHA |")
@@ -189,6 +189,80 @@ def PrintAttr(x):
 
 def GetRace(x, eb):
     """Determines optimum race based on preferences"""
+
+    if x.tertiary != "none":#If they've chosen a tertiary option, suggest human or variant human
+        print("Since you've given 3 preferences, consider human, a + 1 to all attributes.")
+        print("Would you like to pick Human?")
+        awaiting = True
+        while awaiting:
+            human = input(":")
+            human = human.lower()
+            if human == "yes" or human == "yeah" or  human == "y":
+                print("Human chosen!")
+                x.race = "Human"
+                x.str = x.str + 1
+                x.dex = x.dex + 1
+                x.con = x.con + 1
+                x.int = x.int + 1
+                x.wis = x.wis + 1
+                x.cha = x.wis + 1
+                return x#if we choose Human, no need to run the rest of the function, simply return
+            
+            elif human == "no" or human == "n" or human == "nah":
+                awaiting = False   
+            else:
+                print("Didn\'t understand input. Please try again:")
+
+    print("Would you like to choose Variant Human? + 1 to primary and secondary preferences?")
+    awaiting = True
+    while awaiting:#always suggest Variant Human
+        vhuman = input(":")
+        vhuman = vhuman.lower()
+        if vhuman == "yes" or vhuman == "yeah" or  vhuman == "y":
+
+            print("Variant Human chosen!")
+            x.race = "Variant Human"
+            if x.secondary == "none": 
+                print("NB: Since you haven't chosen a secondary preference, you can still assign a + 1 to something else.")
+            if x.primary == "str" or x.secondary == "str": x.str = x.str +1
+            if x.primary == "dex" or x.secondary == "dex": x.dex = x.dex +1
+            if x.primary == "con" or x.secondary == "con": x.con = x.con +1
+            if x.primary == "int" or x.secondary == "int": x.int = x.int +1
+            if x.primary == "wis" or x.secondary == "wis": x.wis = x.wis +1
+            if x.primary == "cha" or x.secondary == "cha": x.cha = x.cha +1
+
+            print("Will your chosen lv 1 feat alter an attribute score?")
+            print("If so, which one?")
+            while True:
+                plus1 = input(":")
+                plus1 = plus1.lower()
+                if plus1 == "str" or plus1 == "strength": 
+                    x.str = x.str + 1
+                    return x
+                if plus1 == "dex" or plus1 == "dexterity": 
+                    x.dex = x.dex + 1
+                    return x
+                if plus1 == "con" or plus1 == "constitution": 
+                    x.con = x.con + 1
+                    return x
+                if plus1 == "int" or plus1 == "intelligence": 
+                    x.int = x.int + 1
+                    return x
+                if plus1 == "wis" or plus1 == "wisdom": 
+                    x.wis = x.wis + 1
+                    return x
+                if plus1 == "cha" or plus1 == "charisma": 
+                    x.cha = x.cha + 1
+                    return x
+                if plus1 == "no" or plus1 == "nah" or plus1 == "n":
+                    return x
+                else:
+                    print("Didn\'t understand input. Please try again:")
+        elif vhuman == "no" or vhuman == "nah" or  vhuman == "n":
+            awaiting = False
+        else:
+            print("Didn\'t understand input. Please try again:")
+                
 
     if x.primary == "str":#Strength primary
 
@@ -756,6 +830,7 @@ def GetRace(x, eb):
             print("Also consider Changeling")
             x.race = x.race + " or Changeling"
 
+    
     return x
 
 def PrintTTT(x, F, R):

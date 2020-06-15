@@ -2,13 +2,15 @@
 #Main.py
 
 import Funcs
+#import Gui
+
 print("\n\n\nWelcome to Optimise!")
 print("What method of score generation are you using?")
 print("1 - Standard Array \n2 - Point Buy \n3 - Rolled \n")
 
 
 awaiting = True
-while awaiting:#grabs score generation method, this changes what class is imported
+while awaiting:#grabs score generation method, this changes what class is imported. Bad code design, but I'm more just shocked that it actually works
     genmethod = input(":")
     if genmethod == "1":
         print("Standard Array Selected!")
@@ -124,10 +126,10 @@ print("\n\nEnd of function. Press Enter to close.")
 input("")
 
 #FUTURE IMPLEMENTATION:
+#create GUI
+#give user choice to reserve some ASI levels for feats, and skip those levels in FuncsTTT()
 #print other features of selected races to provide a more informed decision
 #extend point buy attribute score preference to choose manually
 #DONE give user choice on non-preffered attribute scores to provide full picture
-#give user choice to reserve some ASI levels for feats, and skip those levels in FuncsTTT()
 #DONE add MToF races
-#add human reccomendations
-#create GUI
+#DONE add human reccomendations
