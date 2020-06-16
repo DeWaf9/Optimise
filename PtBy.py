@@ -141,6 +141,122 @@ def GetAttrScores2(x):
     
     return x
     
+def GetAttrScoresManual(x):
+    """Completely manual Point-Buy assignment"""
+
+    print("Manually assigning attribute scores using point-buy, please note the cost table:")
+    print("+---------------+")
+    print("| Score | Cost  |")
+    print("|---------------|")
+    print("|   8   |   0   |")
+    print("|   9   |   1   |")
+    print("|   10  |   2   |")
+    print("|   11  |   3   |")
+    print("|   12  |   4   |")
+    print("|   13  |   5   |")
+    print("|   14  |   7   |")
+    print("|   15  |   9   |")
+    print("+---------------+")
+
+    ScoresDone = 0
+    while ScoresDone < 6:#loops until all scores have been assigned
+        print("Which Attribute would you like to assign?")
+        print("You have " + str(x.pool) + " points left.")
+        atr = input(":")
+        atr = atr.lower()
+
+        if atr == "str" or atr == "strength":
+            if x.str == 0:
+                print("Strength chosen!")
+                x = ManualAssign(x, 1)#run other attribute assignment function
+                ScoresDone = ScoresDone + 1
+            else:
+                print("Strength already assigned! Please choose again!")
+        elif atr == "dex" or atr == "dexterity":
+            if x.dex == 0:
+                print("Dexterity chosen!")
+                x = ManualAssign(x, 2)
+                ScoresDone = ScoresDone + 1
+            else:
+                print("Dexterity already assigned! Please choose again!")
+        elif atr == "con" or atr == "constitution":
+            if x.con == 0:
+                print("Constitution chosen!")
+                x = ManualAssign(x, 3)
+                ScoresDone = ScoresDone + 1
+            else:
+                print("Consitution already assigned! Please choose again!")
+        elif atr == "int" or atr == "intelligence":
+            if x.int == 0:
+                print("Intelligence chosen!")
+                x = ManualAssign(x, 4)
+                ScoresDone = ScoresDone + 1
+            else:
+                print("Intelligence already assigned! Please choose again!")
+        elif atr == "wis" or atr == "wisdom":
+            if x.wis == 0:
+                print("Wisdom chosen!")
+                x = ManualAssign(x, 5)
+                ScoresDone = ScoresDone + 1
+            else:
+                print("Wisdom already assigned! Please choose again!")
+        elif atr == "cha" or atr == "charisma":
+            if x.cha == 0:
+                print("Charisma chosen!")
+                x = ManualAssign(x, 6)
+                ScoresDone = ScoresDone + 1
+            else:
+                print("Charisma already assigned! Please choose again!")
+        else:
+            print("Didn\'t understand input. Please try again:")
+
+    return x
+
+def ManualAssign(x, attribute):
+    """Assigns a single attribute"""#1 for str, 2 for dex, and so on
+
+    print("What score would you like to assign?")
+    while True:#keep looping until we return x
+        score = input(":")
+        if score == "8" or score == "9" or score == "10" or score == "11" or score == "12" or score == "13" or score == "14" or score == "15":
+    #This is an annoying if statement, but it's neccessary to check that input is a number before converting to an integer, or python dies
+            score = int(score)
+
+            if score < 14:#calculating point buy cost
+                cost = score - 8
+            elif score == 14:
+                cost = 7
+            elif score == 15:
+                cost = 9
+            
+            if x.pool - cost >= 0:#checking if we have enough point-buy points
+                x.pool = x.pool - cost
+
+                if attribute == 1:
+                    x.str = score
+                    print(str(score) + " Strength assigned!")
+                elif attribute == 2:
+                    x.dex = score
+                    print(str(score) + " Dexterity assigned!")
+                elif attribute == 3:
+                    x.con = score
+                    print(str(score) + " Constitution assigned!")
+                elif attribute == 4:
+                    x.int = score
+                    print(str(score) + " Intelligence assigned!")
+                elif attribute == 5:
+                    x.wis = score
+                    print(str(score) + " Wisdom assigned!")
+                elif attribute == 6:
+                    x.cha = score
+                    print(str(score) + " Charisma assigned!")
+                return x
+            else:# if we don't have enough points
+                print("Not enough points for that score! Please choose a lower score!")
+
+        else:#if number out of range
+            print("Didn\'t understand input. Please try again: Choose a number between 8 and 15.")
+
 def XOtherScores(x):
     """Cleans up other attribute scores"""
     if x.str == 8:#if we haven't changed a score from it's default, we don't care about it. Change it to "X" for the time being.

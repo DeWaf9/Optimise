@@ -1,5 +1,6 @@
 ##!/usr/bin/env python
-#Main.py
+#Main.py for Optimise, a program built for D&D 5E Charcter min-max-ing
+#works in conjunction with Funcys.py, StdAry.py, PyBy.py, Rolld.py, and Gui.py
 
 import Funcs
 #import Gui
@@ -30,12 +31,15 @@ while awaiting:#grabs score generation method, this changes what class is import
 user = method.character()#creates character object
 
 user = Funcs.GetAttrPref(user)#Asks user for attribute preferences
+HasntManuallyAlloc = True #if the user has chosen point buy, they might allocate all their scores manually. This checks that.
 
-if genmethod == "2" and user.tertiary != "none": #Choice in point-buy: all 3 preferences = 15, or 1st, 2nd, 3rd = 15, 15, 13
-    #Note that we don't bother asking if they didn't choose a tertiary preference, they're the same otherwise
+if genmethod == "2": 
+    
+    #Choice in point-buy: all 3 preferences = 15, or 1st, 2nd, 3rd = 15, 15, 13, or completely manual
     print("Seeing as you've chosen Point Buy...")
-    print("How Min-Max-y are we talking?")
-    print("Sensible or MAD?")
+    print("How Min-Max-y are we? Or would you like to allocate your attributes manually?")
+    print("Sensible, MAD, or manual?")
+
     awaiting = True
     while awaiting:
         sillyness = input(":")
@@ -47,27 +51,32 @@ if genmethod == "2" and user.tertiary != "none": #Choice in point-buy: all 3 pre
         elif sillyness == "mad":
             user = method.GetAttrScores2(user)#Assigns attribute scores based on preferences: 15, 15, 15
             awaiting = False
+        elif sillyness == "manual" or sillyness == "manually":
+            user = method.GetAttrScoresManual(user)
+            awaiting = False
+            HasntManuallyAlloc = False#don't need to run any OtherScores() methods
         else:
            print("Didn\'t understand input. Please try again:")
 else:
     user = method.GetAttrScores(user)#No choice needed for other 2 methods
 
 
-awaiting = True#Gives users choice on their non-preffered scores
-print("\nWould you like to assign your other attribute scores?")
-while awaiting:
-    assign = input(":")
-    assign = assign.lower()
+if HasntManuallyAlloc:#Gives users choice on their non-preffered scores, if they haven't allocated manually with point-buy, as above.
+    awaiting = True
+    print("\nWould you like to assign your other attribute scores?")
+    while awaiting:
+        assign = input(":")
+        assign = assign.lower()
 
-    if assign == "y" or assign == "yes" or assign == "yeah":
-        user = method.AssignOtherScores(user)#Launch manual assignment method
-        awaiting = False
-    elif assign == "n" or assign == "no" or assign == "nah":
-        user = method.XOtherScores(user)#Assign generic "X"
-        method.PrintLeftovers(user)
-        awaiting = False
-    else:
-        print("Didn\'t understand input. Please try again:")
+        if assign == "y" or assign == "yes" or assign == "yeah":
+            user = method.AssignOtherScores(user)#Launch manual assignment method
+            awaiting = False
+        elif assign == "n" or assign == "no" or assign == "nah":
+            user = method.XOtherScores(user)#Assign generic "X"
+            method.PrintLeftovers(user)
+            awaiting = False
+        else:
+            print("Didn\'t understand input. Please try again:")
 
 print("Current attribute scores:")
 Funcs.PrintAttr(user)#ascii art of current configuration
@@ -129,7 +138,7 @@ input("")
 #create GUI
 #give user choice to reserve some ASI levels for feats, and skip those levels in FuncsTTT()
 #print other features of selected races to provide a more informed decision
-#extend point buy attribute score preference to choose manually
+#DONE extend point buy attribute score preference to choose manually
 #DONE give user choice on non-preffered attribute scores to provide full picture
 #DONE add MToF races
 #DONE add human reccomendations
