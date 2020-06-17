@@ -338,6 +338,7 @@ def GetRace(x, eb):
             print("No obvious choice for primary & secondary preference. Using tertiary to determine race...")
             if x.tertiary == "con":
                 x.race = "Sea Elf or Goblin or Stout Halfling, or Shadar-Kai"
+                if eb: x.race = x.race + " or Human Mark of Passage"
                 print(x.race + " chosen!")
                 x.dex = x.dex + 2
                 x.con = x.con + 1
@@ -351,7 +352,7 @@ def GetRace(x, eb):
                 print(x.race + " chosen!")
             elif x.tertiary == "wis":
                 if eb:
-                    x.race = "Aarakocra or Wood Elf or Kenku or Halfling Mark of Healing"
+                    x.race = "Aarakocra or Wood Elf or Kenku or Halfling Mark of Healing or Human Mark of Passage"
                 else:
                     x.race = "Aarakocra or Wood Elf or Kenku"
                 x.dex = x.dex + 2
@@ -359,7 +360,7 @@ def GetRace(x, eb):
                 print(x.race + " chosen!")
             elif x.tertiary == "cha":
                 if eb:
-                    x.race = "Drow or Tabaxi or Swifthide Strider or Elf Mark of Shadow or Halfling Mark of Hospitality or Lightfoot Halfing"
+                    x.race = "Drow or Tabaxi or Swifthide Strider or Elf Mark of Shadow or Halfling Mark of Hospitality or Lightfoot Halfing or Human Mark of Passage"
                 else:
                     x.race = "Drow or Tabaxi or Swifthide Strider"
                 print(x.race + " chosen!")
@@ -374,6 +375,7 @@ def GetRace(x, eb):
 
         elif x.secondary == "con":
             x.race = "Sea Elf or Goblin or Stout Halfling, or Shadar-Kai"
+            if eb: x.race = x.race + " or Human Mark of Passage"
             print(x.race + " chosen!")
             x.dex = x.dex + 2
             x.con = x.con + 1
@@ -391,7 +393,7 @@ def GetRace(x, eb):
 
         elif x.secondary == "wis":
             if eb:
-                x.race = "Aarakocra or Wood Elf or Kenku or Halfling Mark of Healing"
+                x.race = "Aarakocra or Wood Elf or Kenku or Halfling Mark of Healing or Human Mark of Passage"
             else:
                 x.race = "Aarakocra or Wood Elf or Kenku"
             x.dex = x.dex + 2
@@ -401,7 +403,7 @@ def GetRace(x, eb):
 
         elif x.secondary == "cha":
             if eb:
-                x.race = "Drow or Tabaxi or Swifthide Strider or Elf Mark of Shadow or Halfling Mark of Hospitality or Lightfoot Halfing"
+                x.race = "Drow or Tabaxi or Swifthide Strider or Elf Mark of Shadow or Halfling Mark of Hospitality or Lightfoot Halfing or Human Mark of Passage"
             else:
                 x.race = "Drow or Tabaxi or Swifthide Strider"
             print(x.race + " chosen!")
@@ -419,11 +421,6 @@ def GetRace(x, eb):
                 x.race = "Tabaxi or Swifthide Strider or Any Elf or Any Halfling or Goblin or Aaracokra or Kenku"
                 print(x.race)
                 x.dex = x.dex + 2
-
-
-        if eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned human mark of passage, do so.
-            print("Also consider Human Mark of Passage!")
-            x.race = x.race + " or Human Mark of Passage"
 
 
     elif x.primary == "con":#Constitution primary
