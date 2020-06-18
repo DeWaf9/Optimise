@@ -236,23 +236,41 @@ def GetRace(x, eb):
             while True:
                 plus1 = input(":")
                 plus1 = plus1.lower()
-                if plus1 == "str" or plus1 == "strength": 
-                    x.str = x.str + 1
+                if plus1 == "str" or plus1 == "strength":
+                    if x.str == " X": #if we've assigned it an "X", then it can't add one, so we must do so as a string
+                        x.str = "X+1" 
+                    else:
+                        x.str = x.str + 1
                     return x
-                if plus1 == "dex" or plus1 == "dexterity": 
-                    x.dex = x.dex + 1
+                if plus1 == "dex" or plus1 == "dexterity":
+                    if x.dex == " X":
+                        x.dex = "X+1"
+                    else:
+                        x.dex = x.dex + 1
                     return x
-                if plus1 == "con" or plus1 == "constitution": 
-                    x.con = x.con + 1
+                if plus1 == "con" or plus1 == "constitution":
+                    if x.con == " X":
+                        x.con = "X+1"
+                    else:
+                        x.con = x.con + 1
                     return x
-                if plus1 == "int" or plus1 == "intelligence": 
-                    x.int = x.int + 1
+                if plus1 == "int" or plus1 == "intelligence":
+                    if x.int == " X":
+                        x.int = "X+1"
+                    else:
+                        x.int = x.int + 1
                     return x
-                if plus1 == "wis" or plus1 == "wisdom": 
-                    x.wis = x.wis + 1
+                if plus1 == "wis" or plus1 == "wisdom":
+                    if x.wis == " X":
+                        x.wis = "X+1"
+                    else:
+                        x.wis = x.wis + 1
                     return x
-                if plus1 == "cha" or plus1 == "charisma": 
-                    x.cha = x.cha + 1
+                if plus1 == "cha" or plus1 == "charisma":
+                    if x.cha == " X":
+                        x.cha = "X+1"
+                    else:
+                        x.cha = x.cha + 1
                     return x
                 if plus1 == "no" or plus1 == "nah" or plus1 == "n":
                     return x
@@ -553,7 +571,7 @@ def GetRace(x, eb):
                     print(x.race)
                     x.int = x.int + 2
 
-            else:#wisdom also has no obvious choice, this groups both wis & none case together
+            elif x.tertiary == "wis":
                 if eb:
                     x.race = "Human Mark of Making"
                     print(x.race + " chosen!")
@@ -564,10 +582,22 @@ def GetRace(x, eb):
                     x.race = "Any Gnome"
                     print(x.race)
                     x.int = x.int + 2
+
+            else:
+                if eb:
+                    x.race = "Human Mark of Making"
+                    print(x.race + " chosen!")
+                    x.int = x.int + 2
+                else:
+                    print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
+                    x.race = "Any Gnome"
+                    print(x.race)
+                    x.int = x.int + 2
                 
         
         elif x.secondary == "dex":
             x.race = "Deep Gnome, or Forest Gnome"
+            if eb: x.race = x.race + "or Human Mark of Making"
             print(x.race + " chosen!")
             x.int = x.int + 2
             x.dex = x.dex + 1
@@ -575,6 +605,7 @@ def GetRace(x, eb):
 
         elif x.secondary == "con":
             x.race = "Rock Gnome"
+            if eb: x.race = x.race + "or Human Mark of Making"
             print(x.race + " chosen!")
             x.int = x.int + 2
             x.con = x.con + 1
@@ -584,6 +615,7 @@ def GetRace(x, eb):
             print("No obvious choice for primary & secondary preference. Using tertiary to determine race...")
             if x.tertiary == "dex":
                 x.race = "Forest Gnome or Deep Gnome"
+                if eb: x.race = x.race + "or Human Mark of Making"
                 print(x.race + " chosen!")
                 x.int = x.int + 2
                 x.dex = x.dex + 1
@@ -591,6 +623,7 @@ def GetRace(x, eb):
         
             elif x.tertiary == "con":
                 x.race = "Rock Gnome"
+                if eb: x.race = x.race + "or Human Mark of Making"
                 print(x.race + " chosen!")
                 x.int = x.int + 2
                 x.con = x.con + 1
@@ -608,12 +641,23 @@ def GetRace(x, eb):
                     x.int = x.int + 2
 
 
-            else:#no bovious choce for str, this does both
+            elif x.tertiary == "str":
                 if eb:
                     x.race = "Human Mark of Making"
                     print(x.race + " chosen!")
                     x.int = x.int + 2
                     x.str = x.str + 1
+                else:
+                    print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
+                    x.race = "Any Gnome"
+                    print(x.race)
+                    x.int = x.int + 2
+
+            else:
+                if eb:
+                    x.race = "Human Mark of Making"
+                    print(x.race + " chosen!")
+                    x.int = x.int + 2
                 else:
                     print("Still no obvious choice based on tertiary preference... Using any Int-based class.")
                     x.race = "Any Gnome"
@@ -624,7 +668,7 @@ def GetRace(x, eb):
         elif x.secondary == "cha":
             
             if eb:
-                x.race = "Gnome Mark of Scribing"
+                x.race = "Gnome Mark of Scribing or Human Mark of Making"
                 print(x.race + " chosen!")
                 x.int = x.int + 2
                 x.cha = x.cha + 1
@@ -651,19 +695,9 @@ def GetRace(x, eb):
                     
 
         elif x.secondary == "none":#if no secondary chosen
-            if eb:
-                print("No secondary choice! Using Human Mark of Making")
-                x.race = "Human Mark of Making"
-                x.int = x.int + 2
-            else:
-                print("No secondary choice! Using any Int-based class")
-                x.race = "Any Gnome"
-                x.int = x.int + 2
-
-
-        if eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned human mark of making, do so.
-            print("Also consider Human Mark of Making!")
-            x.race = x.race + " or Human Mark of Making"
+            print("No secondary choice! Using any Int-based class")
+            x.race = "Any Gnome"
+            x.int = x.int + 2
 
 
     elif x.primary == "wis": #Wisdom Primary
@@ -671,19 +705,21 @@ def GetRace(x, eb):
 
         if x.secondary == "str":
             x.race = "Firbolg"
+            if eb: x.race = x.race + " or Human Mark of Handling or Half-Elf Mark of Detection"
             print(x.race + " chosen!")
             x.wis = x.wis + 2
             x.str = x.str + 1
         
         elif x.secondary == "dex":
             x.race = "Wildhunt Shifter"
+            if eb: x.race = x.race + " or Human Mark of Handling or Half-Elf Mark of Detection"
             print(x.race + " chosen!")
             x.wis = x.wis + 2
             x.dex = x.dex + 1
 
         elif x.secondary == "con":
             if eb:
-                x.race = "Half-Orc Mark of Finding"
+                x.race = "Half-Orc Mark of Finding or Human Mark of Handling or Half-Elf Mark of Detection"
                 print(x.race + " chosen!")
                 x.wis = x.wis + 2
                 x.con = x.con + 1
@@ -722,7 +758,7 @@ def GetRace(x, eb):
 
         elif x.secondary == "cha":
             if eb:
-                x.race = "Kalashtar"
+                x.race = "Kalashtar or Human Mark of Handling or Half-Elf Mark of Detection"
                 print(x.race + " chosen!")
                 x.wis = x.wis + 2
                 x.cha = x.cha + 1
@@ -761,11 +797,6 @@ def GetRace(x, eb):
                 x.race = "Firbolg, or Wildhunt Shifter"
                 print(x.race)
                 x.wis = x.wis + 2
-
-
-        if eb and x.secondary != "none": # If eberron content is enabled, and we haven't mentioned these races, do so.
-            print("Also consider Human Mark of Handling, or Half-Elf Mark of Detection!")
-            x.race = x.race + " or Human Mark of Handling, or Half-Elf Mark of Detection"
 
 
     elif x.primary == "cha": #Charisma primary
@@ -844,6 +875,78 @@ def PrintTTT(x, F, R):
     carry = False
     #Carry detects whether there's a carry over from the previous preference. Eg: an ASI would take an attribute from 19 -> 21.
     # Instead, makes that 20, and makes carry True. Then in the next preference section we add 1 to that attribute
+
+    awaiting = True
+    print("Would you like to use ans ASIs as feats? If so, how many?")
+    while awaiting:
+        feats = input(":")
+        if feats == "0" or feats == "1" or feats == "2" or feats == "3" or feats == "4" or feats == "5" or feats == "6" or feats == "7":
+            feats = int(feats)#check input is a number before converting to int
+            if feats > asimax:
+                print("You don't have that many ASIs! Please choose a lower number of feats.")
+            else:
+                print(str(feats) + " feats chosen!")
+                awaiting = False
+        elif feats == "nah" or feats == "no" or feats == "n":
+            print("No feats chosen.")
+            feats = 0
+            awaiting = False
+        elif feats == "yeah" or feats == "yes" or feats == "y":
+            print("How many feats are you taking?")
+        else:
+            print("Didn\'t understand input, or too many feats chosen. Please try again:")
+
+    if feats > 0:
+        print("Are any of your chosen feats increasing your attribue scores? If so, which ones?")
+        print("Type \'done\' to finish.")
+        ctr = 0
+        while ctr <= feats:
+            atrinc = input(":")
+            atrinc = atrinc.lower()
+
+            if atrinc == "str" or atrinc == "strength":
+                if isinstance(x.str, int): #if it's an integer, add one
+                    x.str = x.str + 1
+                else: #if not, then it's an X, and re-format it appropriately. 
+                    #Note that this breaks down if a user chooses this twice, but hopefully no-one is choosing multiple attribute boosting feats for non-preffered scores
+                    x.str = "X+1"
+                ctr = ctr + 1
+            elif atrinc == "dex" or atrinc == "dexterity":
+                if isinstance(x.dex, int):
+                    x.dex = x.dex + 1
+                else:
+                    x.dex = "X+1"
+                ctr = ctr + 1
+            elif atrinc == "con" or atrinc == "constitution":
+                if isinstance(x.con, int):
+                    x.con = x.con + 1
+                else:
+                    x.con = "X+1"
+                ctr = ctr + 1
+            elif atrinc == "int" or atrinc == "intelligence":
+                if isinstance(x.int, int):
+                    x.int = x.int + 1
+                else:
+                    x.int = "X+1"
+                ctr = ctr + 1
+            elif atrinc == "wis" or atrinc == "wisdom":
+                if isinstance(x.wis, int):
+                    x.wis = x.wis + 1
+                else:
+                    x.wis = "X+1"
+                ctr = ctr + 1
+            elif atrinc == "cha" or atrinc == "charisma":
+                if isinstance(x.cha, int):
+                    x.cha = x.cha + 1
+                else:
+                    x.cha = "X+1"
+                ctr = ctr + 1
+            elif atrinc == "done":
+                ctr = feats + 1
+            else:
+                print("Didn\'t understand input. Please try again:")
+            
+
 
     if x.primary  == "str":
         while x.str < 20 and asis < asimax:
@@ -1115,6 +1218,10 @@ def PrintTTT(x, F, R):
             ttt[2] = asis
         else:
             ttt[2] = "20 cha unable to be reached. Will reach " + str(x.cha) + " cha at lv 19"
+
+    ttt[0] = ttt[0] + feats#add the number of feats chosen from ASI total
+    ttt[1] = ttt[1] + feats
+    ttt[2] = ttt[2] + feats
 
     if F == False and R == False:#Most classes
         if ttt[0] == asimax:

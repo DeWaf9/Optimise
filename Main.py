@@ -136,8 +136,8 @@ input("")
 
 #FUTURE IMPLEMENTATION:
 #create GUI
-#give user choice to reserve some ASI levels for feats, and skip those levels in FuncsTTT()
 #print other features of selected races to provide a more informed decision
+#DONE give user choice to reserve some ASI levels for feats, and skip those levels in Funcs.PrintTTT()
 #DONE extend point buy attribute score preference to choose manually
 #DONE give user choice on non-preffered attribute scores to provide full picture
 #DONE add MToF races

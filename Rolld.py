@@ -25,65 +25,66 @@ class character:
         self.race = "N/A"
 
 def GetAttrScores(x):
+    """Assigns attribute scores based on preferences"""
 
-        if x.primary == "str":
-            x.str = max(x.stats)#allocates highest rolled number to primary preference
-            x.stats[x.stats.index(x.str)] = 0#set that number to zero once it's been used so we don't re-use it
-        elif x.primary == "dex":
-            x.dex = max(x.stats)
-            x.stats[x.stats.index(x.dex)] = 0
-        elif x.primary == "con":
-            x.con = max(x.stats)
-            x.stats[x.stats.index(x.con)] = 0
-        elif x.primary == "int":
-            x.int = max(x.stats)
-            x.stats[x.stats.index(x.int)] = 0
-        elif x.primary == "wis":
-            x.wis = max(x.stats)
-            x.stats[x.stats.index(x.wis)] = 0
-        elif x.primary == "cha":
-            x.cha = max(x.stats)
-            x.stats[x.stats.index(x.cha)] = 0
+    if x.primary == "str":
+        x.str = max(x.stats)#allocates highest rolled number to primary preference
+        x.stats[x.stats.index(x.str)] = 0#set that number to zero once it's been used so we don't re-use it
+    elif x.primary == "dex":
+        x.dex = max(x.stats)
+        x.stats[x.stats.index(x.dex)] = 0
+    elif x.primary == "con":
+        x.con = max(x.stats)
+        x.stats[x.stats.index(x.con)] = 0
+    elif x.primary == "int":
+        x.int = max(x.stats)
+        x.stats[x.stats.index(x.int)] = 0
+    elif x.primary == "wis":
+        x.wis = max(x.stats)
+        x.stats[x.stats.index(x.wis)] = 0
+    elif x.primary == "cha":
+        x.cha = max(x.stats)
+        x.stats[x.stats.index(x.cha)] = 0
         
-        if x.secondary == "str":#basically a copy paste. No need to check for preference duplicates, we did that in Funcs.GetAttrPref()
-            x.str = max(x.stats)
-            x.stats[x.stats.index(x.str)] = 0
-        elif x.secondary == "dex":
-            x.dex = max(x.stats)
-            x.stats[x.stats.index(x.dex)] = 0
-        elif x.secondary == "con":
-            x.con = max(x.stats)
-            x.stats[x.stats.index(x.con)] = 0
-        elif x.secondary == "int":
-            x.int = max(x.stats)
-            x.stats[x.stats.index(x.int)] = 0
-        elif x.secondary == "wis":
-            x.wis = max(x.stats)
-            x.stats[x.stats.index(x.wis)] = 0
-        elif x.secondary == "cha":
-            x.cha = max(x.stats)
-            x.stats[x.stats.index(x.cha)] = 0
+    if x.secondary == "str":#basically a copy paste. No need to check for preference duplicates, we did that in Funcs.GetAttrPref()
+        x.str = max(x.stats)
+        x.stats[x.stats.index(x.str)] = 0
+    elif x.secondary == "dex":
+        x.dex = max(x.stats)
+        x.stats[x.stats.index(x.dex)] = 0
+    elif x.secondary == "con":
+        x.con = max(x.stats)
+        x.stats[x.stats.index(x.con)] = 0
+    elif x.secondary == "int":
+        x.int = max(x.stats)
+        x.stats[x.stats.index(x.int)] = 0
+    elif x.secondary == "wis":
+        x.wis = max(x.stats)
+        x.stats[x.stats.index(x.wis)] = 0
+    elif x.secondary == "cha":
+        x.cha = max(x.stats)
+        x.stats[x.stats.index(x.cha)] = 0
         
-        if x.tertiary == "str":#Yet another copy-paste
-            x.str = max(x.stats)
-            x.stats[x.stats.index(x.str)] = 0
-        elif x.tertiary == "dex":
-            x.dex = max(x.stats)
-            x.stats[x.stats.index(x.dex)] = 0
-        elif x.tertiary == "con":
-            x.con = max(x.stats)
-            x.stats[x.stats.index(x.con)] = 0
-        elif x.tertiary == "int":
-            x.int = max(x.stats)
-            x.stats[x.stats.index(x.int)] = 0
-        elif x.tertiary == "wis":
-            x.wis = max(x.stats)
-            x.stats[x.stats.index(x.wis)] = 0
-        elif x.tertiary == "cha":
-            x.cha = max(x.stats)
-            x.stats[x.stats.index(x.cha)] = 0
+    if x.tertiary == "str":#Yet another copy-paste
+        x.str = max(x.stats)
+        x.stats[x.stats.index(x.str)] = 0
+    elif x.tertiary == "dex":
+        x.dex = max(x.stats)
+        x.stats[x.stats.index(x.dex)] = 0
+    elif x.tertiary == "con":
+        x.con = max(x.stats)
+        x.stats[x.stats.index(x.con)] = 0
+    elif x.tertiary == "int":
+        x.int = max(x.stats)
+        x.stats[x.stats.index(x.int)] = 0
+    elif x.tertiary == "wis":
+        x.wis = max(x.stats)
+        x.stats[x.stats.index(x.wis)] = 0
+    elif x.tertiary == "cha":
+        x.cha = max(x.stats)
+        x.stats[x.stats.index(x.cha)] = 0
         
-        return x
+    return x
 
 def XOtherScores(x):
     """Cleans up other attribute scores"""
@@ -188,10 +189,10 @@ def PrintLeftovers(x):
     """Simply prints leftover scores in no particular order"""
 
     print("\nYour leftover attribute scores are:")
-    i = 0
-    while i < 6:
-        if x.stats[i] != 0:
-            print(str(x.stats[i]) + ",")
-        i = i + 1
+
+    for i in x.stats:
+        if i != 0:
+            print(str(i) + ",")
+
     print("\n")
     
