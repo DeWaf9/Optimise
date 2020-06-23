@@ -1220,8 +1220,8 @@ def PrintTTT(x, F, R):
             ttt[2] = "20 cha unable to be reached. Will reach " + str(x.cha) + " cha at lv 19"
 
     ttt[0] = ttt[0] + feats#add the number of feats chosen from ASI total
-    ttt[1] = ttt[1] + feats
-    ttt[2] = ttt[2] + feats
+    if isinstance(ttt[1], int): ttt[1] = ttt[1] + feats
+    if isinstance(ttt[2], int): ttt[2] = ttt[2] + feats
 
     if F == False and R == False:#Most classes
         if ttt[0] == asimax:
