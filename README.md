@@ -7,4 +7,4 @@ It also contains a .exe, found in the dist\ folder, for ease of use on Windows m
 
 Written by Liam SJ
 
-Version 1.5 - 18/6/20
+Version 1.5 - 23/6/20
